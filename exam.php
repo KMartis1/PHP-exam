@@ -1,5 +1,4 @@
 <?php
-
 /*
  Užduotis nuo 1 iki 4 atlikite galite į vieną failą, rekomenduojame 5, 6, 7 užduotis atlikti atskiruose failuose. 
  Funkcijų ir kintamųjų pavadinimus vadinkite suprantamai,
