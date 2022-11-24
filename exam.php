@@ -24,12 +24,16 @@ $numbers = [
 
 function exercises1(array $numbers): ?int
 {
-    $sum = 0;
-
-    foreach ($numbers as $number) {
-        if ($number % 2 == 0){
-            $sum += $number;
+    $evenNumbers = array_filter(
+        $numbers,
+        function (?int $number): bool {
+            return $number % 2 == 0;
         }
+    );
+
+    $sum = 0;
+    foreach ($evenNumbers as $number) {
+        $sum += $number;
     }
     return $sum;
 }
