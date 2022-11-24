@@ -109,10 +109,38 @@ $holidays = [
     ],
 ];
 
-function exercises3()
+function exercises3(array $holidays)
 {
+    $destinations = [];
 
+    foreach($holidays as $holiday) {
+        if ($holiday['price'] == null) continue;
+        if (!array_key_exists($holiday['destination'], $destinations)) {
+            $destinations[$holiday['destination']] = [
+                'titles' => [$holiday['title']],
+                'total' => $holiday['price'] * $holiday['tourists'],
+            ];
+        } else {
+            array_push($destinations[$holiday['destination']]['titles'], $holiday['title']);
+            $destinations[$holiday['destination']]['total'] += $holiday['price'] * $holiday['tourists'];
+        }
+    }
+
+    foreach($destinations as $destination => $data) {
+        echo("Destination \"" . $destination . "\".\n");
+        echo("Titles: ");
+        echo(implode(", ", array_map(
+            function (string $title): string {
+                return "\"" . $title . "\"";
+            },
+            $data['titles']
+        )));
+        echo("\n");
+        echo("Total: " . $data['total'] . "\n");
+        echo("************\n");
+    }
 }
+// exercises3($holidays);
 
 /*
  4. Pakoreguokite 3 užduotį taip, kad ji duomenis rašytų ne į terminalą, o spausdintų į failą. (1 balas)
