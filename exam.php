@@ -50,10 +50,19 @@ $numbers2 = [
     [],
 ];
 
-function exercises2()
+function exercises2(array $numbers2): ?int
 {
+    $flattenedNumbers = array_merge(...$numbers2);
 
+    $product = 1;
+    foreach ($flattenedNumbers as $number) {
+        $product *= $number;
+    }
+
+    return $product;
 }
+
+// echo(exercises2($numbers2));
 
 /*
  3. Masyve $holidays turime kelionių agentūros siūlomas keliones su kaina ir dalyvių skaičiumi.
