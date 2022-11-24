@@ -22,16 +22,24 @@ $numbers = [
     550,
 ];
 
-function exercises1()
+function exercises1(array $numbers): ?int
 {
+    $sum = 0;
 
+    foreach ($numbers as $number) {
+        if ($number % 2 == 0){
+            $sum += $number;
+        }
+    }
+    return $sum;
 }
+// echo(exercises1($numbers));
 
 /*
- 2. Grąžinkite visų skaičių, esančių $numbers masyve, sandaugą (1 balas), +0.5 jeigu array funkcijos naudojamos
+ 2. Grąžinkite visų skaičių, esančių $numbers2 masyve, sandaugą (1 balas), +0.5 jeigu array funkcijos naudojamos
 */
 
-$numbers = [
+$numbers2 = [
     [1, 3, 5],
     [55, 87, 100],
     [12],
