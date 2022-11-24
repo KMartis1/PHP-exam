@@ -146,10 +146,42 @@ function exercises3(array $holidays)
  4. Pakoreguokite 3 užduotį taip, kad ji duomenis rašytų ne į terminalą, o spausdintų į failą. (1 balas)
 */
 
-function exercises4()
+function exercises4(array $holidays)
 {
+    $file = fopen("output.txt", "w");
 
+    $destinations = [];
+
+    foreach($holidays as $holiday) {
+        if ($holiday['price'] == null) continue;
+        if (!array_key_exists($holiday['destination'], $destinations)) {
+            $destinations[$holiday['destination']] = [
+                'titles' => [$holiday['title']],
+                'total' => $holiday['price'] * $holiday['tourists'],
+            ];
+        } else {
+            array_push($destinations[$holiday['destination']]['titles'], $holiday['title']);
+            $destinations[$holiday['destination']]['total'] += $holiday['price'] * $holiday['tourists'];
+        }
+    }
+
+    foreach($destinations as $destination => $data) {
+        fwrite($file, "Destination \"" . $destination . "\".\n");
+        fwrite($file, "Titles: ");
+        fwrite($file, implode(", ", array_map(
+            function (string $title): string {
+                return "\"" . $title . "\"";
+            },
+            $data['titles']
+        )));
+        fwrite($file, "\n");
+        fwrite($file, "Total: " . $data['total'] . "\n");
+        fwrite($file, "************\n");
+    }
+
+    fclose($file);
 }
+exercises4($holidays);
 
 /*
  5. Sukurkite forma, kuri leistų pridėti failą ir vėliau jį išsaugotų serveryje su formoje nurodytu failo pavadinimu (name). (3 balai)
